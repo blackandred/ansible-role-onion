@@ -80,7 +80,7 @@ HidServAuth {{ client }}
 {% if hsproperties['onion_state']|default('present') != 'absent' %}
 HiddenServiceDir /var/lib/tor/{{ servicename }}/
 {% for port in hsproperties['onion_ports'] %}
-HiddenServicePort {{ port.0 }} {{ onion_ipaddr }}:{{ port.1}}
+HiddenServicePort {{ port.0 }} {{ port.2 | default(onion_ipaddr) }}:{{ port.1}}
 {% endfor %}
 
 {% endif %}
